@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E0F7FA;
+    text-align: center;
+}
+
+header {
+    background-color: #0288D1;
+    padding: 20px;
+    width: 100%;
+    height: auto;
+}
+
+header img {
+    width: 150px;
+}
+
+.filtros {
+    margin: 20px 0;
+}
+
+#barraBusqueda, #filtroAnio {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #0288D1;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #0288D1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #01579B;
+}
+
+.libros-mostrar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.libro {
+    background-color: #FFF;
+    border: 1px solid #0288D1;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+}
+
+.libro img {
+    width: 100px;
+    height: 150px;
+}
+
+.libro p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #0288D1;
+}
