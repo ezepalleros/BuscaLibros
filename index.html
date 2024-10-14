@@ -46,7 +46,7 @@
 
     <div class="abm" id="formAltaLibro" style="display:none;">
         <h3>Agregar/Modificar Libro</h3>
-        <input type="text" id="codigoLibro" placeholder="Código del libro" hidden>
+        <input type="text" id="codigoLibro" placeholder="Código del libro" readonly>
         <input type="text" id="nombreLibro" placeholder="Nombre del libro">
         <input type="text" id="autorLibro" placeholder="Autor del libro">
         <input type="number" id="anioLibro" placeholder="Año de publicación">
@@ -63,7 +63,6 @@
         <button onclick="guardarLibro()">Guardar</button>
     </div>
     <button onclick="habilitarME()">ME</button>
-
 
     <div id="librosMostrar" class="libros-mostrar"></div>
 

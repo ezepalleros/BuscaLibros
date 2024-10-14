@@ -10,12 +10,11 @@ var libros = [
     {codigo: '009', nombre: 'Matilda', autor: 'Roald Dahl', anio: 1988, categoria: 'Infantil', mas18: 'no'}
 ];
 
-
 // Función para mostrar los libros
 function mostrarLibros(librosFiltrados) {
-    document.getElementById('librosMostrar').innerHTML = ''; //Elimina resultados anteriores
+    document.getElementById('librosMostrar').innerHTML = ''; // Elimina resultados anteriores
 
-    librosFiltrados.forEach(function(libro, index) { //Por cada libro filtrado...
+    librosFiltrados.forEach(function(libro, index) { // Por cada libro filtrado
         var imagenSrc = libro.codigo >= '010' ? 'img/nophoto.jpg' : `img/p${libro.codigo}.jpg`;
         var contenidoLibro = `
             <div class="libro">
@@ -25,10 +24,9 @@ function mostrarLibros(librosFiltrados) {
                 <button class="btn-eliminar" style="display:none;" onclick="eliminarLibro(${index})">Eliminar</button>
             </div>
         `;
-        document.getElementById('librosMostrar').innerHTML += contenidoLibro; //Agregar al contenedor
+        document.getElementById('librosMostrar').innerHTML += contenidoLibro; // Agregar al contenedor
     });
 }
-
 
 // Función para filtrar los libros
 function filtrarLibros() {
@@ -39,12 +37,12 @@ function filtrarLibros() {
     var filtroAutor = document.getElementById('filtroAutor').value;
     
     var librosFiltrados = libros.filter(function(libro) { // Aplica los filtros a la lista de libros usando el método filter
-    var coincideNombre = libro.nombre.toLowerCase().includes(busqueda); // Verifica si el nombre coincide con la búsqueda
-    var coincideAnio = !filtroAnio || libro.anio >= filtroAnio; // Verifica si el año es mayor o igual al año filtrado
-    var coincideMas18 = !filtroMas18 || libro.mas18 === 'si'; // Verifica si el libro es para mayores de 18 años (si el checkbox no está marcado, coincide siempre)
-    var coincideCategoria = !filtroCategoria || libro.categoria === filtroCategoria; // Verifica si la categoría coincide con la seleccionada (si no se selecciona categoría, coincide siempre)
-    var coincideAutor = !filtroAutor || libro.autor === filtroAutor; // Verifica si el autor coincide con el seleccionado (si no se selecciona autor, coincide siempre)
-    return coincideNombre && coincideAnio && coincideMas18 && coincideCategoria && coincideAutor; // Devuelve true si el libro cumple con todos los filtros
+        var coincideNombre = libro.nombre.toLowerCase().includes(busqueda); // Verifica si el nombre coincide con la búsqueda
+        var coincideAnio = !filtroAnio || libro.anio >= filtroAnio; // Verifica si el año es mayor o igual al año filtrado
+        var coincideMas18 = !filtroMas18 || libro.mas18 === 'si'; // Verifica si el libro es para mayores de 18 años (si el checkbox no está marcado, coincide siempre)
+        var coincideCategoria = !filtroCategoria || libro.categoria === filtroCategoria; // Verifica si la categoría coincide con la seleccionada (si no se selecciona categoría, coincide siempre)
+        var coincideAutor = !filtroAutor || libro.autor === filtroAutor; // Verifica si el autor coincide con el seleccionado (si no se selecciona autor, coincide siempre)
+        return coincideNombre && coincideAnio && coincideMas18 && coincideCategoria && coincideAutor; // Devuelve true si el libro cumple con todos los filtros
     });
 
     mostrarLibros(librosFiltrados);
@@ -101,6 +99,7 @@ function eliminarLibro(index) {
     //aca utilizamos el Splice para eliminar el libro deseado, el index indica el libro a eliminar y el 1 la cantidad de libros a eliminar
     libros.splice(index, 1);
     mostrarLibros(libros);
+    ocultarFormulario();
 }
 
 function limpiarFormulario() {
@@ -114,24 +113,16 @@ function limpiarFormulario() {
 
 function mostrarFormularioAlta() {
     var formAlta = document.getElementById('formAltaLibro');
-    formAlta.style.display = 'block';
+    formAlta.style.display = 'block'; // Siempre mostrar el formulario
+
+    if (!document.getElementById('codigoLibro').value) {
+        limpiarFormulario();
+    }
 }
 
 function ocultarFormulario() {
     var formAlta = document.getElementById('formAltaLibro');
     formAlta.style.display = 'none'; 
-}
-
-function mostrarFormularioAlta() {
-    var formAlta = document.getElementById('formAltaLibro');
-    
-    if (formAlta.style.display == 'none') {
-        formAlta.style.display = 'block'; 
-    } else {
-        formAlta.style.display = 'none'; 
-    }
-
-    limpiarFormulario(); 
 }
 
 function habilitarME() {
