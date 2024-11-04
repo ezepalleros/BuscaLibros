@@ -1,4 +1,4 @@
-var libros = [
+var libros = JSON.parse(localStorage.getItem('libros')) || [
     {codigo: '001', nombre: 'Gaturro 1: El Misterio de las 5 Agathas', autor: 'Nik', anio: 2011, categoria: 'Infantil', mas18: 'no'},
     {codigo: '002', nombre: 'Percy Jackson: El ladrón del rayo', autor: 'Rick Riordan', anio: 2005, categoria: 'Aventura', mas18: 'no'},
     {codigo: '003', nombre: '1984', autor: 'George Orwell', anio: 1949, categoria: 'Distopía', mas18: 'si'},
@@ -10,12 +10,10 @@ var libros = [
     {codigo: '009', nombre: 'Matilda', autor: 'Roald Dahl', anio: 1988, categoria: 'Infantil', mas18: 'no'}
 ];
 
-// Función para mostrar los libros
-function mostrarLibros(librosFiltrados) {
-    document.getElementById('librosMostrar').innerHTML = ''; // Elimina resultados anteriores
-
-    librosFiltrados.forEach(function(libro, index) { // Por cada libro filtrado
-        var imagenSrc = libro.codigo >= '010' ? 'img/nophoto.jpg' : `img/p${libro.codigo}.jpg`;
+export const mostrarLibros = (librosFiltrados) => {
+    document.getElementById('librosMostrar').innerHTML = '';
+    librosFiltrados.forEach(function(libro, index) {
+        var imagenSrc = libro.imagen || (libro.codigo >= '01000' ? '/img/nophoto.jpg' : `/img/p${libro.codigo}.jpg`);
         var contenidoLibro = `
             <div class="libro">
                 <img src="${imagenSrc}" alt="Portada de ${libro.nombre}">
@@ -24,37 +22,38 @@ function mostrarLibros(librosFiltrados) {
                 <button class="btn-eliminar" style="display:none;" onclick="eliminarLibro(${index})">Eliminar</button>
             </div>
         `;
-        document.getElementById('librosMostrar').innerHTML += contenidoLibro; // Agregar al contenedor
+        document.getElementById('librosMostrar').innerHTML += contenidoLibro;
     });
-}
+};
 
-// Función para filtrar los libros
-function filtrarLibros() {
+
+export const filtrarLibros = () => {
     var busqueda = document.getElementById('barraBusqueda').value.toLowerCase();
     var filtroAnio = document.getElementById('filtroAnio').value;
     var filtroMas18 = document.getElementById('filtroMas18').checked;
     var filtroCategoria = document.getElementById('filtroCategoria').value;
     var filtroAutor = document.getElementById('filtroAutor').value;
-    
-    var librosFiltrados = libros.filter(function(libro) { // Aplica los filtros a la lista de libros usando el método filter
-        var coincideNombre = libro.nombre.toLowerCase().includes(busqueda); // Verifica si el nombre coincide con la búsqueda
-        var coincideAnio = !filtroAnio || libro.anio >= filtroAnio; // Verifica si el año es mayor o igual al año filtrado
-        var coincideMas18 = !filtroMas18 || libro.mas18 === 'si'; // Verifica si el libro es para mayores de 18 años (si el checkbox no está marcado, coincide siempre)
-        var coincideCategoria = !filtroCategoria || libro.categoria === filtroCategoria; // Verifica si la categoría coincide con la seleccionada (si no se selecciona categoría, coincide siempre)
-        var coincideAutor = !filtroAutor || libro.autor === filtroAutor; // Verifica si el autor coincide con el seleccionado (si no se selecciona autor, coincide siempre)
-        return coincideNombre && coincideAnio && coincideMas18 && coincideCategoria && coincideAutor; // Devuelve true si el libro cumple con todos los filtros
+
+    var librosFiltrados = libros.filter(function(libro) {
+        var coincideNombre = libro.nombre.toLowerCase().includes(busqueda);
+        var coincideAnio = !filtroAnio || libro.anio >= filtroAnio;
+        var coincideMas18 = !filtroMas18 || libro.mas18 === 'si';
+        var coincideCategoria = !filtroCategoria || libro.categoria === filtroCategoria;
+        var coincideAutor = !filtroAutor || libro.autor === filtroAutor;
+        return coincideNombre && coincideAnio && coincideMas18 && coincideCategoria && coincideAutor;
     });
 
     mostrarLibros(librosFiltrados);
-}
+};
 
-function guardarLibro() {
+export const guardarLibro = () => {
     var codigo = document.getElementById('codigoLibro').value;
     var nombre = document.getElementById('nombreLibro').value;
     var autor = document.getElementById('autorLibro').value;
     var anio = document.getElementById('anioLibro').value;
     var categoria = document.getElementById('categoriaLibro').value;
     var mas18 = document.getElementById('mas18Libro').checked ? 'si' : 'no';
+    var imagen = document.getElementById('imagenLibro').files[0];
 
     if (codigo) {
         var libro = libros.find(libro => libro.codigo === codigo);
@@ -63,10 +62,16 @@ function guardarLibro() {
         libro.anio = anio;
         libro.categoria = categoria;
         libro.mas18 = mas18;
+        if (imagen) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const imagenSrc = `data:image/jpeg;base64,${reader.result.split(',')[1]}`;
+                libro.imagen = imagenSrc;
+            };
+            reader.readAsDataURL(imagen);
+        }
     } else {
         var nuevoLibro = {
-            //en este caso para las imagenes usamos el codigo de libro como refencia, para ello utilizamos el .padStart lo que hace esto es indicarnos la longitud
-            //de la cadena y el otro numero sera con lo que se llenara la cadena si no se ingresan la totalidad de los numeros 
             codigo: String(libros.length + 1).padStart(3, '0'),
             nombre: nombre,
             autor: autor,
@@ -74,16 +79,26 @@ function guardarLibro() {
             categoria: categoria,
             mas18: mas18,
         };
-        //aca el push lo utilizamos para agregar elementos al final del array
+        if (imagen) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const imagenSrc = `data:image/jpeg;base64,${reader.result.split(',')[1]}`;
+                nuevoLibro.imagen = imagenSrc;
+            };
+            reader.readAsDataURL(imagen);
+        }
         libros.push(nuevoLibro);
     }
+
+    localStorage.setItem('libros', JSON.stringify(libros));
 
     mostrarLibros(libros);
     limpiarFormulario();
     ocultarFormulario();
-}
+};
 
-function editarLibro(index) {
+
+export const editarLibro = (index) => {
     var libro = libros[index];
     document.getElementById('codigoLibro').value = libro.codigo;
     document.getElementById('nombreLibro').value = libro.nombre;
@@ -91,55 +106,49 @@ function editarLibro(index) {
     document.getElementById('anioLibro').value = libro.anio;
     document.getElementById('categoriaLibro').value = libro.categoria;
     document.getElementById('mas18Libro').checked = libro.mas18 === 'si';
-
     mostrarFormularioAlta();
-}
+};
 
-function eliminarLibro(index) {
-    //aca utilizamos el Splice para eliminar el libro deseado, el index indica el libro a eliminar y el 1 la cantidad de libros a eliminar
+export const eliminarLibro = (index) => {
     libros.splice(index, 1);
+    localStorage.setItem('libros', JSON.stringify(libros));
     mostrarLibros(libros);
-    ocultarFormulario();
-}
+};
 
-function limpiarFormulario() {
+export const limpiarFormulario = () => {
     document.getElementById('codigoLibro').value = '';
     document.getElementById('nombreLibro').value = '';
     document.getElementById('autorLibro').value = '';
     document.getElementById('anioLibro').value = '';
     document.getElementById('categoriaLibro').value = '';
     document.getElementById('mas18Libro').checked = false;
-}
+};
 
-function mostrarFormularioAlta() {
+export const mostrarFormularioAlta = () => {
     var formAlta = document.getElementById('formAltaLibro');
-    formAlta.style.display = 'block'; // Siempre mostrar el formulario
+    formAlta.style.display = 'block';
+};
 
-    if (!document.getElementById('codigoLibro').value) {
-        limpiarFormulario();
-    }
-}
-
-function ocultarFormulario() {
+export const ocultarFormulario = () => {
     var formAlta = document.getElementById('formAltaLibro');
-    formAlta.style.display = 'none'; 
-}
+    formAlta.style.display = 'none';
+};
 
-function habilitarME() {
+export const habilitarME = () => {
     var botonesModificar = document.querySelectorAll('.btn-modificar');
     var botonesEliminar = document.querySelectorAll('.btn-eliminar');
-    var estanOcultos = botonesModificar[0].style.display == 'none';
+    var estanOcultos = botonesModificar[0].style.display === 'none';
 
-    //con el forEach nos aseguramos de modificar todos los botones, 
-    //para evitar usar IF lo simplificamos para que opte por 2 opciones, para establecer el estado del boton
     botonesModificar.forEach(function(boton) {
         boton.style.display = estanOcultos ? 'block' : 'none';
     });
-
     botonesEliminar.forEach(function(boton) {
-        boton.style.display = estanOcultos ? 'block' : 'none'; 
+        boton.style.display = estanOcultos ? 'block' : 'none';
     });
-}
+};
+
+window.editarLibro = editarLibro;
+window.eliminarLibro = eliminarLibro;
 
 window.onload = function() {
     mostrarLibros(libros);
