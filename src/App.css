@@ -10,21 +10,14 @@ body {
   text-align: center;
 }
 
-/* Estilos para el contenedor principal */
-.App {
+.App, .App-header {
   text-align: center;
 }
 
-/* Estilos para el logo de la app */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  animation: App-logo-spin infinite 20s linear;
 }
 
 .App-header {
@@ -38,22 +31,15 @@ body {
   color: white;
 }
 
-/* Animación del logo */
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Estilos para el header */
 header {
   background-color: #0288D1;
   padding: 20px;
   width: 100%;
-  height: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,16 +49,10 @@ header img {
   width: 150px;
 }
 
-/* Estilos para el menú de navegación */
 header nav ul {
   list-style: none;
   display: flex;
   gap: 15px;
-  margin: 0;
-}
-
-header nav ul li {
-  display: inline;
 }
 
 header nav ul li a {
@@ -87,7 +67,6 @@ header nav ul li a:hover {
   color: #B3E5FC;
 }
 
-/* Estilos para la sección de filtros */
 .filtros {
   margin: 20px 0;
   display: flex;
@@ -119,7 +98,6 @@ button:hover {
   background-color: #01579B;
 }
 
-/* Estilos para la visualización de libros */
 .libros-mostrar {
   display: flex;
   flex-wrap: wrap;
@@ -147,7 +125,6 @@ button:hover {
   color: #0288D1;
 }
 
-/* Estilos específicos para la sección "Nosotros" */
 .nosotros {
   padding: 20px;
   text-align: left;
