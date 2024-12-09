@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# BuscaLibros
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**BuscaLibros** es una aplicación web diseñada para facilitar la búsqueda, exploración y gestión de libros. Con una interfaz amigable e intuitiva, esta herramienta es ideal para cualquier amante de la lectura que desee descubrir nuevos títulos o administrar su colección personal de manera eficiente.
 
-## Available Scripts
+## Funcionalidades Principales
 
-In the project directory, you can run:
+- **Búsqueda Rápida**: Encuentra libros fácilmente utilizando el sistema de filtros.
+- **Filtros Personalizables**:
+  - Filtrar por año de publicación.
+  - Categorías específicas como *Infantil*, *Aventura*, *Distopía*, entre otras.
+  - Opción para mostrar solo libros para mayores de 18 años.
+  - Buscar un autor específico.
+- **Interfaz Adaptativa**: Disfruta de una experiencia fluida desde cualquier dispositivo gracias a su diseño responsive.
 
-### `npm start`
+## ¿Para Qué Sirve?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+BuscaLibros es perfecta para:  
+1. **Lectores Aficionados**: Descubre nuevos libros para leer basándote en tus preferencias.  
+2. **Bibliotecas y Coleccionistas**: Organiza y visualiza títulos en una colección bien estructurada.  
+3. **Educadores y Estudiantes**: Encuentra recursos literarios para proyectos académicos o personales.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ¿Cómo puedo utilizar la herramienta?
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Puedes disfrutar de **BuscaLibros** descargando el repositorio para utilizar en tu computadora o ingresando a la página web:  
+[https://busca-libros.vercel.app/](https://busca-libros.vercel.app/)
